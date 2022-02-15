@@ -62,6 +62,15 @@ void sortTest()
     }
 }
 
+/*
+Для 1м элементов:
+Vector: 52637 мкс
+Array: 57536 мкс
+Deque: 68985 мкс
+List: 275424 мкс
+Forward list: 585439 мкс
+*/
+
 int main()
 {
     sortTest();
