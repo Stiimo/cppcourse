@@ -56,16 +56,19 @@ class Timer {
 public:
     Timer() = default;
 
-    Timer(const std::string& name)
+    explicit Timer(const std::string& name)
         : m_name(name)
     {
     }
+
+    Timer(const Timer& other) = delete;
+    Timer& operator=(const Timer& other) = delete;
 
     ~Timer() noexcept
     {
         try {
             stop();
-            std::cout << *this;
+            std::cout << *this << std::endl;
         } catch (const std::exception& e) {
             std::cerr << "Unhandled exception during " << m_name << " timer destruction: " << e.what() << std::endl;
         } catch (...) {
@@ -118,9 +121,9 @@ std::ostream& operator<<(std::ostream& s, const Timer<Duration>& t)
     auto name = t.name();
     auto elapsed = t.elapsed();
     if (elapsed.has_value()) {
-        s << name << ": " << elapsed.value().count() << ' ' << t.units() << std::endl;
+        s << name << ": " << elapsed.value().count() << ' ' << t.units();
     } else {
-        s << name << " is running now" << std::endl;
+        s << name << " is running now";
     }
     return s;
 }
