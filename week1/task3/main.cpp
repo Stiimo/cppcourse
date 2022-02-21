@@ -1,8 +1,7 @@
 #include "timer.h"
 #include <iostream>
 
-int main()
-{
+int main() {
     Timer<std::chrono::microseconds> t("MicroTimer");
     t.start();
     double x = 0.0;

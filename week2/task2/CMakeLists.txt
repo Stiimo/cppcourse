@@ -1,8 +1,3 @@
-cmake_minimum_required(VERSION 3.5)
+project(w2_t2)
 
-project(task2 LANGUAGES CXX)
-
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-add_executable(task2 main.cpp timer.h)
+add_executable(${PROJECT_NAME} main.cpp timer.h)

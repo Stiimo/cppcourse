@@ -3,14 +3,12 @@
 
 using vector_t = std::vector<char>;
 
-void printVectorSizeInfo(const vector_t &v)
-{
+void printVectorSizeInfo(const vector_t &v) {
     std::cout << "Size: " << v.size() << " Capacity: " << v.capacity() << std::endl;
 }
 
 // Коэффициент изменения емкости вектора - х2
-void memMultiplierCoef()
-{
+void memMultiplierCoef() {
     std::cout << "Memory multiply coefficient test" << std::endl;
     vector_t v;
     printVectorSizeInfo(v);
@@ -20,11 +18,10 @@ void memMultiplierCoef()
     }
 }
 
-// Тут остается тот же коээфициент
-void reserveTest()
-{
+// Тут остается тот же коэффициент
+void reserveTest() {
     std::cout << "Reserv test" << std::endl;
-    for (const auto &s : {3, 6, 8, 10, 15}) {
+    for (const auto &s: {3, 6, 8, 10, 15}) {
         vector_t v;
         v.reserve(s);
         printVectorSizeInfo(v);
@@ -37,8 +34,7 @@ void reserveTest()
 }
 
 // Исключение std::bad_alloc
-void insufficientMemoryTest()
-{
+void insufficientMemoryTest() {
     std::cout << "Insufficient memory test" << std::endl;
     vector_t v(12500000000, ' ');
     printVectorSizeInfo(v);
@@ -46,13 +42,12 @@ void insufficientMemoryTest()
     printVectorSizeInfo(v);
 }
 
-int main()
-{
+int main() {
     memMultiplierCoef();
     reserveTest();
     try {
         insufficientMemoryTest();
-    } catch (const std::bad_alloc& e) {
+    } catch (const std::bad_alloc &e) {
         std::cout << e.what() << std::endl;
     }
     return 0;

@@ -1,11 +1,7 @@
-cmake_minimum_required(VERSION 3.5)
-
-project(task3 LANGUAGES CXX)
-
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(w2_t3)
 
 find_package(Boost REQUIRED)
 
-add_executable(task3 vector_to_multiarray_raw.cpp)
-target_link_libraries(task3 PRIVATE Boost::boost)
+add_executable(${PROJECT_NAME} vector_to_multiarray_raw.cpp)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::boost)
