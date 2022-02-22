@@ -7,6 +7,7 @@
 #include <numeric>
 #include <random>
 #include <vector>
+#include <progress_bar/progressbar.h>
 
 std::vector<int> genValues(size_t n) {
     std::random_device rd;
@@ -68,9 +69,7 @@ void oneSortTest(std::array<uint64_t, 5> &times) {
 void sortTest() {
     std::array<uint64_t, 5> times{};
     constexpr size_t iters = 100000;
-    for (size_t i = 0; i < iters; ++i) {
-        oneSortTest(times);
-    }
+    ProgressBar::wrapForLoop(iters, [&times](size_t) { oneSortTest(times); });
     std::array<double, 5> avgTimes{};
     std::transform(times.begin(), times.end(), avgTimes.begin(), [](uint64_t x) { return x * 1.0 / iters; });
     std::cout << "Vector: " << avgTimes[0];

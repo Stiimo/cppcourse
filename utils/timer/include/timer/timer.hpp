@@ -50,10 +50,9 @@ class Timer {
     using time_point_t = clock_t::time_point;
 
 public:
-    Timer() = default;
+    explicit Timer(bool silent = true) : Timer("Timer", silent) {}
 
-    explicit Timer(std::string name) : m_name(std::move(name)) {
-    }
+    explicit Timer(std::string name, bool silent = true) : m_name(std::move(name)), m_silent(silent) {}
 
     Timer(const Timer &other) = delete;
 
@@ -62,7 +61,9 @@ public:
     ~Timer() noexcept {
         try {
             stop();
-            std::cout << *this << std::endl;
+            if (!m_silent) {
+                std::cout << *this << std::endl;
+            }
         } catch (const std::exception &e) {
             std::cerr << "Unhandled exception during " << m_name << " timer destruction: " << e.what() << std::endl;
         } catch (...) {
@@ -102,7 +103,8 @@ private:
     Duration m_totalDuration{0};
     time_point_t m_begin{};
     bool m_isActive{false};
-    std::string m_name{"Timer"};
+    std::string m_name;
+    bool m_silent{};
 };
 
 template<typename Duration>
