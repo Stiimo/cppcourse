@@ -72,20 +72,20 @@ void sortTest() {
     ProgressBar::wrapForLoop(iters, [&times](size_t) { oneSortTest(times); });
     std::array<double, 5> avgTimes{};
     std::transform(times.begin(), times.end(), avgTimes.begin(), [](uint64_t x) { return x * 1.0 / iters; });
-    std::cout << "Vector: " << avgTimes[0];
-    std::cout << "Array: " << avgTimes[1];
-    std::cout << "Deque: " << avgTimes[2];
-    std::cout << "List: " << avgTimes[3];
-    std::cout << "Forward list: " << avgTimes[4];
+    std::cout << "Vector: " << avgTimes[0] << std::endl;
+    std::cout << "Array: " << avgTimes[1] << std::endl;
+    std::cout << "Deque: " << avgTimes[2] << std::endl;
+    std::cout << "List: " << avgTimes[3] << std::endl;
+    std::cout << "Forward list: " << avgTimes[4] << std::endl;
 }
 
 /*
-Для 1м элементов (1 запуск):
-Vector: 52637 мкс
-Array: 57536 мкс
-Deque: 68985 мкс
-List: 275424 мкс
-Forward list: 585439 мкс
+Среднее по 100к элементам на 100к запусков:
+Vector: 4730,27 мкс
+Array: 4717,04 мкс
+Deque: 5779,28 мкс
+List: 19088,90 мкс
+Forward list: 73397,20 мкс
 */
 
 int main() {
