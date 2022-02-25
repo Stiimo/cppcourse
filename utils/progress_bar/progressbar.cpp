@@ -14,8 +14,8 @@ void ProgressBar::wrapForLoop(size_t total, const std::function<void(size_t i)> 
 
 ProgressBar::ProgressBar(size_t total) : m_total(total) {
     constexpr size_t textSize = 23;
-    if (winsize size{}; ioctl(STDOUT_FILENO, TIOCGWINSZ, &size)) {
-        std::cerr << "Failed to retrieve window size. Falling back to default window size: 100";
+    if (winsize size{}; ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) || size.ws_col <= 0) {
+        std::cerr << "Failed to retrieve window size. Falling back to default window size: 100" << std::endl;
         m_lineSize = 100 - textSize;
     } else {
         m_lineSize = size.ws_col - textSize;

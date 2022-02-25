@@ -71,7 +71,8 @@ void sortTest() {
     constexpr size_t iters = 100000;
     ProgressBar::wrapForLoop(iters, [&times](size_t) { oneSortTest(times); });
     std::array<double, 5> avgTimes{};
-    std::transform(times.begin(), times.end(), avgTimes.begin(), [](uint64_t x) { return x * 1.0 / iters; });
+    std::transform(times.begin(), times.end(), avgTimes.begin(),
+                   [](uint64_t x) { return static_cast<double >(x) / iters; });
     std::cout << "Vector: " << avgTimes[0] << std::endl;
     std::cout << "Array: " << avgTimes[1] << std::endl;
     std::cout << "Deque: " << avgTimes[2] << std::endl;
