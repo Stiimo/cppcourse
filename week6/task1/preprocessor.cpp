@@ -9,7 +9,6 @@ void Preprocessor::process(std::istream &sin, std::ostream &sout) {
         auto state = m_states.top();
         if (static_cast<int>(state) & 4) {
             sout << m_buf;
-            sout.flush();
             m_buf.clear();
         }
     }
@@ -54,7 +53,6 @@ void Preprocessor::processSlash() {
             m_states.pop();
             break;
         case State::Comment:
-            [[fallthrough]];
         case State::MultilineComment:
             break;
         case State::Code:
