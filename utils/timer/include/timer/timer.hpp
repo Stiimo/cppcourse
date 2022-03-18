@@ -58,6 +58,10 @@ public:
 
     Timer &operator=(const Timer &other) = delete;
 
+    Timer(Timer &&other) noexcept = default;
+
+    Timer &operator=(Timer &&other) noexcept = default;
+
     ~Timer() noexcept {
         try {
             stop();
