@@ -198,4 +198,3 @@ void Preprocessor::processRegularChars(char c) {
             break;
     }
 }
-
