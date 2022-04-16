@@ -6,7 +6,7 @@
 template<typename T, typename Compare = std::greater<T>>
 class ThreadSafeHeap {
 public:
-    explicit ThreadSafeHeap() = default;
+    explicit ThreadSafeHeap(Compare cmp = Compare()) : mCmp(cmp) {}
 
     explicit ThreadSafeHeap(const std::vector<T> &v, Compare cmp = Compare())
             : mHeap(v), mCmp(cmp) {
