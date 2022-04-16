@@ -1,6 +1,6 @@
-#include <iostream>
 #include "Writer.h"
 #include "StopToken.h"
+#include "Console.h"
 #include <boost/interprocess/sync/scoped_lock.hpp>
 
 using unique_lock = boost::interprocess::scoped_lock<shm::shared_mutex>;
@@ -8,8 +8,9 @@ using condition_lock = boost::interprocess::scoped_lock<shm::mutex>;
 
 void Writer::run(const StopToken &stopToken) {
     std::string msg;
-    while (std::cin.good()) {
-        std::getline(std::cin, msg);
+    auto console = Console::instance();
+    while (console->good()) {
+        console->getString(msg);
         if (msg.empty()) { continue; }
         unique_lock lock(*m_buffer_mutex);
         auto alloc = shm::char_allocator(get_segment_manager());
@@ -21,5 +22,5 @@ void Writer::run(const StopToken &stopToken) {
     }
     stopToken.requestStop();
     m_condition->notify_all();
-    std::cout << "Writer is finishing work" << std::endl;
+    console->putString("Writer is finishing work");
 }

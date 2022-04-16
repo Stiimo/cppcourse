@@ -4,13 +4,13 @@ find_package(Boost REQUIRED COMPONENTS system)
 find_package(Threads REQUIRED)
 
 add_executable(${PROJECT_NAME}
-        main.cpp
+        main.cpp types.h
         ShmClient.cpp ShmClient.h
         Reader.cpp Reader.h
         InterruptableThread.cpp InterruptableThread.h
         Writer.cpp Writer.h
         StopToken.cpp StopToken.h
-        types.h)
+        Console.cpp Console.h)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system Threads::Threads rt)
 

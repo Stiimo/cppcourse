@@ -37,7 +37,7 @@ public:
     virtual void run(const StopToken &stopToken) = 0;
 
 protected:
-    /// @note For internal use only! Passing this pointer to
+    /// @note For internal use only! Passing this pointer
     /// outside may result in dangling pointer situation!
     auto get_segment_manager() noexcept { return m_shm.get_segment_manager(); }
 

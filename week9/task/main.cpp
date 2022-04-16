@@ -3,7 +3,6 @@
 #include "InterruptableThread.h"
 
 int main() {
-//    boost::interprocess::shared_memory_object::remove("managed_shared_memory");
     InterruptableThread thread;
     Reader reader(std::this_thread::get_id());
     Writer writer;
