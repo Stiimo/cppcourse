@@ -12,9 +12,16 @@ void Console::getString(std::string &s) {
             std::cout << std::endl;
             m_eof = true;
         } else if (c == '\n') {
+            std::cout << c;
             break;
+        } else if (c == 127) {
+            if (!m_buffer.empty()) {
+                m_buffer.pop_back();
+            }
+            std::cout << "\b \b";
         } else {
             m_buffer.push_back(c);
+            std::cout << c;
         }
     }
 
@@ -50,7 +57,7 @@ Console::Console() {
     });
     tcgetattr(STDIN_FILENO, oldTio.get());
     auto newTio = *oldTio;
-    newTio.c_lflag &= ~ICANON;
+    newTio.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newTio);
     noskipws(std::cin);
 }

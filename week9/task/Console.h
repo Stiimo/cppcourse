@@ -16,7 +16,7 @@ public:
 
     void putString(const MsgData &data);
 
-    bool good() const;
+    [[nodiscard]] bool good() const;
 
     static Console *instance();
 
